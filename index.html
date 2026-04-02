@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Asset Refresh Approval</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef2f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 10px;
+      width: 420px;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #222;
+    }
+    .info {
+      margin-bottom: 12px;
+    }
+    .label {
+      font-weight: bold;
+      color: #555;
+    }
+    .value {
+      margin-left: 5px;
+    }
+    .badge {
+      background: #ffc107;
+      color: #000;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 12px;
+      margin-left: 5px;
+    }
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      resize: none;
+    }
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .approve {
+      background-color: #28a745;
+      color: white;
+    }
+    .reject {
+      background-color: #dc3545;
+      color: white;
+    }
+    .status {
+      margin-top: 15px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Asset Refresh Approval</h2>
+
+  <div class="info">
+    <span class="label">Employee Name:</span>
+    <span class="value" id="empName">Jane Smith</span>
+  </div>
+
+  <div class="info">
+    <span class="label">Employee ID:</span>
+    <span class="value" id="empId">EMP67890</span>
+  </div>
+
+  <div class="info">
+    <span class="label">Current Device:</span>
+    <span class="value">Dell Latitude 5400</span>
+  </div>
+
+  <div class="info">
+    <span class="label">Device Age:</span>
+    <span class="value">4 Years</span>
+    <span class="badge">End of Life</span>
+  </div>
+
+  <div class="info">
+    <span class="label">Issue Reported:</span>
+    <span class="value">Performance degradation</span>
+  </div>
+
+  <div class="info">
+    <span class="label">Requested Asset:</span>
+    <span class="value">New Laptop</span>
+  </div>
+
+  <textarea id="comments" rows="3" placeholder="Add comments (optional)"></textarea>
+
+  <div class="buttons">
+    <button class="approve" onclick="handleAction('Approved')">Approve</button>
+    <button class="reject" onclick="handleAction('Rejected')">Reject</button>
+  </div>
+
+  <div class="status" id="statusMsg"></div>
+</div>
+
+<script>
+  function handleAction(action) {
+    const comments = document.getElementById("comments").value;
+
+    const payload = {
+      employeeName: document.getElementById("empName").innerText,
+      employeeId: document.getElementById("empId").innerText,
+      requestType: "Asset Refresh",
+      action: action,
+      comments: comments,
+      timestamp: new Date().toISOString()
+    };
+
+    console.log("Asset Approval Payload:", payload);
+
+    document.getElementById("statusMsg").innerText =
+      "Request " + action + " successfully!";
+
+    document.querySelectorAll("button").forEach(btn => btn.disabled = true);
+  }
+</script>
+
+</body>
+</html>
